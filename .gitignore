@@ -1,0 +1,33 @@
+# Hugo build output (CI builds it fresh on every push)
+/public/
+/resources/_gen/
+.hugo_build.lock
+
+# Search index (built in CI)
+/pagefind/
+
+# Node / tooling
+node_modules/
+
+# Secrets: never commit these
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+id_rsa*
+id_ed25519*
+*credentials*
+*secret*
+
+# macOS
+.DS_Store
+._*
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*~
