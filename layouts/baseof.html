@@ -10,8 +10,8 @@
 {{ block "main" . }}{{ end }}
 </main>
 {{ partial "footer.html" . }}
-{{ $js := resources.Get "js/main.js" | js.Build (dict "minify" true) | fingerprint }}
-<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+{{ $js := resources.Get "js/main.js" | js.Build (dict "minify" true) }}
+<script src="{{ $js.RelPermalink }}?v={{ substr (md5 $js.Content) 0 10 }}" defer></script>
 {{ if .Store.Get "hasMermaid" }}{{ partial "mermaid.html" . }}{{ end }}
 </body>
 </html>

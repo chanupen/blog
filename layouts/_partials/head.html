@@ -30,8 +30,9 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f766e'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-family='Palatino,Georgia,serif' font-size='30' fill='white'%3ECK%3C/text%3E%3C/svg%3E">
 {{- /* Same localStorage key as chanupen.github.io, so the theme choice carries across the site and the blog. */}}
 <script>(function(){try{if(localStorage.getItem("theme")==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
-{{- $css := slice (resources.Get "css/main.css") (resources.Get "css/syntax.css") | resources.Concat "css/blog.css" | minify | fingerprint }}
-<link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+{{- /* Stable file name + version query: a page cached from an older deploy still finds its stylesheet. */}}
+{{- $css := slice (resources.Get "css/main.css") (resources.Get "css/syntax.css") | resources.Concat "css/blog.css" | minify }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}?v={{ substr (md5 $css.Content) 0 10 }}">
 {{- if .IsPage }}
 <script type="application/ld+json">
 {{ dict
