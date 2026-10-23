@@ -1,8 +1,8 @@
 ---
 title: "The first five minutes on a sick Linux box"
-date: 2026-10-23T23:30:00+05:30
-draft: true
-description: "The triage I have used for 13 years, from RHEL servers in a telecom data centre to Kubernetes pods with no shell, and why a container can be OOMKilled while the node has free memory."
+date: 2026-10-23T23:45:00+05:30
+draft: false
+description: "The triage I have used for 13+ years, from RHEL servers in a telecom data centre to Kubernetes pods with no shell, and why a container can be OOMKilled while the node has free memory."
 tags: [linux, troubleshooting, kubernetes, sre]
 ---
 
