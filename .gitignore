@@ -31,3 +31,6 @@ id_ed25519*
 .idea/
 *.swp
 *~
+
+# Posts may use words like "secret" or "credentials" in their names
+!/content/**
