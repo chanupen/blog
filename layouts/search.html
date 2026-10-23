@@ -1,0 +1,19 @@
+{{ define "main" }}
+<section class="narrow">
+  <header class="page-head">
+    <h1>Search</h1>
+    <p>Search across every post.</p>
+  </header>
+  <div id="search" class="search-box"></div>
+  <noscript><p class="search-note">Search needs JavaScript. You can browse by <a href="{{ "tags/" | relURL }}">tags</a> instead.</p></noscript>
+</section>
+<link rel="stylesheet" href="{{ "pagefind/pagefind-ui.css" | relURL }}">
+<script src="{{ "pagefind/pagefind-ui.js" | relURL }}" onerror="document.getElementById('search').innerHTML='<p class=search-note>The search index is built when the site is published. See the README for a local preview with search.</p>'"></script>
+<script>
+  window.addEventListener("DOMContentLoaded", function () {
+    if (window.PagefindUI) {
+      new PagefindUI({ element: "#search", showSubResults: true, showImages: false, resetStyles: false });
+    }
+  });
+</script>
+{{ end }}

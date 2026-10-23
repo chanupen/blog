@@ -1,0 +1,11 @@
+<footer class="site">
+  <div class="wrap">
+    <span>© {{ now.Year }} {{ site.Params.author }} · Noida, India</span>
+    <nav aria-label="Elsewhere">
+      <a href="{{ site.Params.mainSite }}">Website</a>
+      <a href="{{ site.Params.github }}">GitHub</a>
+      <a href="{{ site.Params.linkedin }}">LinkedIn</a>
+      {{ with site.Home.OutputFormats.Get "rss" }}<a href="{{ .RelPermalink }}">RSS</a>{{ end }}
+    </nav>
+  </div>
+</footer>

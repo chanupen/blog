@@ -1,0 +1,10 @@
+{{ define "main" }}
+<section class="narrow">
+  <header class="page-head">
+    <div class="crumb"><a href="{{ "tags/" | relURL }}">Tags</a> /</div>
+    <h1>{{ .Title }}</h1>
+    <p>{{ len .Pages }} post{{ if ne (len .Pages) 1 }}s{{ end }} tagged “{{ .Title }}”</p>
+  </header>
+  {{ partial "post-list.html" .Pages }}
+</section>
+{{ end }}

@@ -1,0 +1,14 @@
+{{- /* Loaded only on pages that contain a ```mermaid block. */ -}}
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+  const blocks = [...document.querySelectorAll("pre.mermaid")];
+  blocks.forEach(b => b.dataset.src = b.textContent);
+  const render = async () => {
+    const light = document.documentElement.getAttribute("data-theme") === "light";
+    blocks.forEach(b => { b.removeAttribute("data-processed"); b.innerHTML = ""; b.textContent = b.dataset.src; });
+    mermaid.initialize({ startOnLoad: false, theme: light ? "neutral" : "dark", fontFamily: "Charter, 'Charis SIL', Georgia, serif", securityLevel: "strict" });
+    await mermaid.run({ nodes: blocks });
+  };
+  render();
+  document.addEventListener("themechange", render);
+</script>

@@ -1,0 +1,21 @@
+{{ define "main" }}
+<section class="intro">
+  <div class="narrow">
+    <h1>{{ with .Params.heading }}{{ . }}{{ else }}Notes from production{{ end }}</h1>
+    <div class="role">{{ site.Params.author }} · {{ site.Params.role }}</div>
+    {{ with .Content }}<div>{{ . }}</div>{{ else }}<p>{{ site.Params.description }}</p>{{ end }}
+    <div class="links">
+      <a class="chip" href="{{ site.Params.mainSite }}">About me</a>
+      <a class="chip" href="{{ site.Params.github }}">GitHub</a>
+      <a class="chip" href="{{ site.Params.linkedin }}">LinkedIn</a>
+      {{ with .OutputFormats.Get "rss" }}<a class="chip" href="{{ .RelPermalink }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 11a9 9 0 0 1 9 9M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1.2" fill="currentColor"/></svg>RSS</a>{{ end }}
+    </div>
+  </div>
+</section>
+<section class="narrow">
+  {{ $posts := where site.RegularPages "Section" "posts" }}
+  {{ $pager := .Paginate $posts }}
+  {{ partial "post-list.html" $pager.Pages }}
+  {{ partial "pagination.html" . }}
+</section>
+{{ end }}

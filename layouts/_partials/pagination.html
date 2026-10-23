@@ -1,0 +1,10 @@
+{{- $p := .Paginator }}
+{{- if gt $p.TotalPages 1 }}
+<nav aria-label="Pages">
+  <ul class="pagination">
+    {{- with $p.Prev }}<li><a href="{{ .URL }}" rel="prev">← Newer</a></li>{{ end }}
+    {{- range $p.Pagers }}<li{{ if eq . $p }} class="active"{{ end }}><a href="{{ .URL }}">{{ .PageNumber }}</a></li>{{ end }}
+    {{- with $p.Next }}<li><a href="{{ .URL }}" rel="next">Older →</a></li>{{ end }}
+  </ul>
+</nav>
+{{- end }}

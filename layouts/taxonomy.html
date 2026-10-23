@@ -1,0 +1,15 @@
+{{ define "main" }}
+<section class="narrow">
+  <header class="page-head">
+    <h1>Tags</h1>
+    <p>Browse posts by topic.</p>
+  </header>
+  {{ with .Data.Terms.ByCount }}
+  <ul class="tag-cloud">
+    {{ range . }}<li><a class="tag" href="{{ .Page.RelPermalink }}">{{ .Page.LinkTitle }}<b>{{ .Count }}</b></a></li>{{ end }}
+  </ul>
+  {{ else }}
+  <p class="empty">No tags yet.</p>
+  {{ end }}
+</section>
+{{ end }}

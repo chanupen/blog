@@ -1,0 +1,40 @@
+{{ define "main" }}
+<article class="narrow" data-pagefind-body>
+  <header class="post-head">
+    <div class="crumb"><a href="{{ site.Home.RelPermalink }}">Blog</a> /</div>
+    <h1>{{ .Title }}</h1>
+    {{ with .Description }}<p class="lede">{{ . }}</p>{{ end }}
+    {{ partial "meta.html" . }}
+  </header>
+
+  {{ if and (ne .Params.toc false) (gt (len .Fragments.Headings) 0) (gt .WordCount 600) }}
+  <details class="toc" data-pagefind-ignore>
+    <summary>Contents</summary>
+    {{ .TableOfContents }}
+  </details>
+  {{ end }}
+
+  <div class="prose">
+    {{ .Content }}
+  </div>
+
+  <footer class="post-foot" data-pagefind-ignore>
+    {{ partial "tags.html" . }}
+
+    {{ $prev := .PrevInSection }}{{ $next := .NextInSection }}
+    {{ if or $prev $next }}
+    <nav class="pager" aria-label="More posts">
+      {{ with $next }}<a class="prev" href="{{ .RelPermalink }}"><small>← Newer</small>{{ .Title }}</a>{{ end }}
+      {{ with $prev }}<a class="next" href="{{ .RelPermalink }}"><small>Older →</small>{{ .Title }}</a>{{ end }}
+    </nav>
+    {{ end }}
+
+    <div class="author">
+      <div class="mark" aria-hidden="true">CK</div>
+      <p><b>{{ site.Params.author }}</b><br>{{ site.Params.role }}, Noida. More about my work at <a href="{{ site.Params.mainSite }}">chanupen.github.io</a>.</p>
+    </div>
+
+    {{ partial "comments.html" . }}
+  </footer>
+</article>
+{{ end }}

@@ -1,0 +1,16 @@
+{{- /* Images placed next to a post's index.md are resolved from the page bundle.
+       A Markdown title becomes the caption: ![alt](diagram.png "Caption") */ -}}
+{{- $src := .Destination -}}
+{{- $w := "" -}}{{- $h := "" -}}
+{{- with .PageInner.Resources.Get .Destination -}}
+  {{- $src = .RelPermalink -}}
+  {{- if in (slice "image/png" "image/jpeg" "image/webp" "image/gif") .MediaType.Type -}}{{- $w = .Width -}}{{- $h = .Height -}}{{- end -}}
+{{- end -}}
+{{- if .Title -}}
+<figure>
+  <img src="{{ $src }}" alt="{{ .PlainText }}" loading="lazy" decoding="async"{{ with $w }} width="{{ . }}"{{ end }}{{ with $h }} height="{{ . }}"{{ end }}>
+  <figcaption>{{ .Title | markdownify }}</figcaption>
+</figure>
+{{- else -}}
+<img src="{{ $src }}" alt="{{ .PlainText }}" loading="lazy" decoding="async"{{ with $w }} width="{{ . }}"{{ end }}{{ with $h }} height="{{ . }}"{{ end }}>
+{{- end -}}

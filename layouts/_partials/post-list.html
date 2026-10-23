@@ -1,0 +1,17 @@
+{{- /* Posts grouped by year. Context: a collection of pages. */ -}}
+{{- if . }}
+{{- range .GroupByDate "2006" }}
+<div class="year">{{ .Key }}</div>
+<ul class="post-list">
+  {{- range .Pages }}
+  <li class="post-item">
+    <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+    <p>{{ with .Description }}{{ . }}{{ else }}{{ .Summary | plainify | truncate 180 }}{{ end }}</p>
+    {{ partial "meta.html" . }}
+  </li>
+  {{- end }}
+</ul>
+{{- end }}
+{{- else }}
+<p class="empty">No posts yet.</p>
+{{- end }}

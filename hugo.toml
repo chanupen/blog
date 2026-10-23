@@ -1,0 +1,90 @@
+# Blog of Chandan Kumar, served at https://chanupen.github.io/blog/
+# (a GitHub Pages project site: repo "blog" under github.com/chanupen)
+
+baseURL      = "https://chanupen.github.io/blog/"
+locale       = "en-IN"
+title        = "Chandan Kumar · Blog"
+copyright    = "Chandan Kumar"
+enableRobotsTXT = false     # robots.txt lives at the root site, not under /blog/
+enableGitInfo   = true      # "Updated" date comes from the last commit touching a post
+buildDrafts     = false
+summaryLength   = 40
+
+[pagination]
+  pagerSize = 20
+
+[permalinks]
+  posts = "/:contentbasename/"   # folder name = URL: content/posts/my-post/ -> /blog/my-post/
+
+[taxonomies]
+  tag = "tags"
+
+[frontmatter]
+  lastmod = [":git", "lastmod", "date"]
+
+[markup]
+  [markup.highlight]
+    noClasses   = false     # colours come from assets/css/syntax.css (dark + light)
+    lineNos     = false
+    tabWidth    = 2
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel   = 3
+  [markup.goldmark.renderer]
+    unsafe = false
+  [markup.goldmark.parser.attribute]
+    block = true
+
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML"]
+  taxonomy = ["HTML"]
+  term = ["HTML"]
+
+[services.rss]
+  limit = 30
+
+[sitemap]
+  changeFreq = "monthly"
+
+[params]
+  author      = "Chandan Kumar"
+  role        = "Senior DevOps / Site Reliability Engineer"
+  description = "Notes from running production systems: Kubernetes, AWS, CI/CD, observability, incident response and the tooling around them."
+  mainSite    = "https://chanupen.github.io/"
+  github      = "https://github.com/chanupen"
+  linkedin    = "https://www.linkedin.com/in/connectchandan"
+  ogImage     = "https://chanupen.github.io/assets/img/og-card.png"
+  showReadingTime = true
+
+  # Comments through Giscus (GitHub Discussions). Fill these in from
+  # https://giscus.app after enabling Discussions on the blog repo.
+  # Comments stay hidden until repoId and categoryId are set.
+  [params.giscus]
+    repo       = "chanupen/blog"
+    repoId     = ""
+    category   = "Comments"
+    categoryId = ""
+    mapping    = "pathname"
+
+  # Site search via Pagefind. The index is built in CI (see .github/workflows).
+  [params.search]
+    enabled = true
+
+[menus]
+  [[menus.main]]
+    name   = "Posts"
+    pageRef = "/"
+    weight = 10
+  [[menus.main]]
+    name   = "Tags"
+    pageRef = "/tags"
+    weight = 20
+  [[menus.main]]
+    name   = "Search"
+    pageRef = "/search"
+    weight = 30
+  [[menus.main]]
+    name   = "About"
+    url    = "https://chanupen.github.io/"
+    weight = 40

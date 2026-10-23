@@ -1,0 +1,11 @@
+{{- /* Date, updated date, reading time. Context: a page. */ -}}
+<div class="meta">
+  <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 Jan 2006" }}</time>
+  {{- if and .IsPage (gt (.Lastmod.Sub .Date).Hours 48) }}
+  <span class="dot">·</span><span>Updated {{ .Lastmod.Format "2 Jan 2006" }}</span>
+  {{- end }}
+  {{- if site.Params.showReadingTime }}
+  <span class="dot">·</span><span>{{ .ReadingTime }} min read</span>
+  {{- end }}
+  {{- if .Draft }}<span class="draft-badge">draft</span>{{ end }}
+</div>

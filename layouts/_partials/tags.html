@@ -1,0 +1,5 @@
+{{- with .GetTerms "tags" }}
+<ul class="tags" aria-label="Tags">
+  {{- range . }}<li><a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>{{ end }}
+</ul>
+{{- end }}
