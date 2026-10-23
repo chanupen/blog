@@ -208,3 +208,5 @@ footer.site nav{display:flex;gap:16px}
 .chroma .hl{display:block;background:color-mix(in srgb,var(--accent) 14%,transparent)!important;margin:0 -18px;padding:0 18px}
 .search-box .pagefind-ui__search-input{font-family:var(--serif-body);font-weight:400}
 .search-box .pagefind-ui__search-clear{font-family:var(--mono);background:transparent;color:var(--ink-3)}
+.prose li:has(> input[type="checkbox"]){list-style:none;margin-left:-1.4em}
+.prose li > input[type="checkbox"]{accent-color:var(--accent);margin:0 .5em 0 0;vertical-align:-.1em}
