@@ -1,0 +1,30 @@
+{{- /* RSS feed for the blog. Uses each post's description (falls back to the summary). */ -}}
+{{- $pages := where site.RegularPages "Section" "posts" -}}
+{{- $limit := site.Config.Services.RSS.Limit -}}
+{{- if ge $limit 1 }}{{ $pages = $pages | first $limit }}{{ end -}}
+{{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{{ site.Title }}</title>
+    <link>{{ .Permalink }}</link>
+    <description>{{ site.Params.description }}</description>
+    <language>{{ site.Language.Locale }}</language>
+    <managingEditor>{{ site.Params.author }}</managingEditor>
+    {{- with $pages }}<lastBuildDate>{{ (index . 0).Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>{{ end }}
+    {{- with .OutputFormats.Get "rss" }}
+    <atom:link href="{{ .Permalink }}" rel="self" type="application/rss+xml" />
+    {{- end }}
+    {{- range $pages }}
+    <item>
+      <title>{{ .Title }}</title>
+      <link>{{ .Permalink }}</link>
+      <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
+      <guid>{{ .Permalink }}</guid>
+      <description>{{ with .Description }}{{ . }}{{ else }}{{ .Summary | plainify | truncate 300 }}{{ end }}</description>
+      {{- range .Params.tags }}
+      <category>{{ . }}</category>
+      {{- end }}
+    </item>
+    {{- end }}
+  </channel>
+</rss>
