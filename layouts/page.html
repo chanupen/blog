@@ -7,7 +7,8 @@
     {{ partial "meta.html" . }}
   </header>
 
-  {{ if and (ne .Params.toc false) (gt (len .Fragments.Headings) 0) (gt .WordCount 600) }}
+  {{ $showToc := true }}{{ with .Params }}{{ if isset . "toc" }}{{ $showToc = .toc }}{{ end }}{{ end }}
+  {{ if and $showToc (gt (len .Fragments.Identifiers) 2) (gt .WordCount 600) }}
   <details class="toc" data-pagefind-ignore>
     <summary>Contents</summary>
     {{ .TableOfContents }}
